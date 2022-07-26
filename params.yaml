@@ -1,0 +1,13 @@
+base:
+  project: simple-dvc-project
+  random_state: 42
+  target_col: quality
+  test_size: 0.2
+
+data_source:
+  data_source: winequality-red.csv
+
+artifacts:
+  artifacts_dir: artifacts
+  raw_local_data_dir: artifacts/raw_local_data_dir
+  raw_local_data: artifacts/raw_local_data_dir/data.csv

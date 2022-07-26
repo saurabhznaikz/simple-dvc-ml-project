@@ -1,0 +1,10 @@
+stages:
+  load_data:
+    cmd: python -m src.stage_01_load_and_save --config=params.yaml
+    deps:
+      - src\stage_01_load_and_save.py
+    params:
+      - data_source.data_source
+      - artifacts.raw_local_data
+    outs:
+      - artifacts\raw_local_data_dir/data.csv

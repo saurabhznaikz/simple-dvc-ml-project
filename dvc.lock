@@ -1,0 +1,16 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python -m src.stage_01_load_and_save --config=params.yaml
+    deps:
+    - path: src\stage_01_load_and_save.py
+      md5: 103f6fcced6f0846b397bf9e91d30da4
+      size: 955
+    params:
+      params.yaml:
+        artifacts.raw_local_data: artifacts/raw_local_data_dir/data.csv
+        data_source.data_source: winequality-red.csv
+    outs:
+    - path: artifacts\raw_local_data_dir/data.csv
+      md5: 7c92f1ee593c0fbd2ad8c67ba5c446df
+      size: 93599
