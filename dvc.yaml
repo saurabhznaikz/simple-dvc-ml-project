@@ -8,3 +8,20 @@ stages:
       - artifacts.raw_local_data
     outs:
       - artifacts\raw_local_data_dir/data.csv
+
+  split_data:
+    cmd: python -m src.stage_02_split_data --config=params.yaml
+    deps:
+      - src/stage_02_split_data.py
+      - artifacts/raw_local_data_dir/data.csv
+      - src/utils/common_utils.py
+    params:
+      - base.random_state
+      - base.test_size
+      - artifacts.raw_local_data
+      - artifacts.split_data.processed_data_dir
+      - artifacts.split_data.train_path
+      - artifacts.split_data.test_path
+    outs:
+      - artifacts/processed_data/train.csv
+      - artifacts/processed_data/test.csv
