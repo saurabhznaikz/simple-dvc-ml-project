@@ -1,6 +1,7 @@
 import os
 import shutil
-
+import logging
+import json
 import yaml
 
 
@@ -24,3 +25,9 @@ def save_local_df(df,df_path,header=False):
 def create_dir(dirs:list):
     for dir_path in dirs:
         os.makedirs(dir_path,exist_ok=True)
+
+def save_reports(filepath: str, report: dict):
+    with open(filepath, "w") as f:
+        json.dump(report, f, indent=4)
+    logging.info(f"details of the report: {report}")
+    logging.info(f"reports saved at {filepath}")
