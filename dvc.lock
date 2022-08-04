@@ -24,8 +24,8 @@ stages:
       md5: e94117419570a870a5269e64a98a1d1d
       size: 1480
     - path: src/utils/common_utils.py
-      md5: 6c15ad9661c6299a304d7fe83d752623
-      size: 904
+      md5: 293810a50407c38c6c201dffb5638338
+      size: 1194
     params:
       params.yaml:
         artifacts.raw_local_data: artifacts/raw_local_data_dir/data.csv
@@ -33,37 +33,37 @@ stages:
         artifacts.split_data.test_path: artifacts/processed_data/test.csv
         artifacts.split_data.train_path: artifacts/processed_data/train.csv
         base.random_state: 42
-        base.test_size: 0.2
+        base.test_size: 0.33
     outs:
     - path: artifacts/processed_data/test.csv
-      md5: b31a4073fa82bc444fd5683cb5cf7e76
-      size: 18832
+      md5: 1360e6aaaa461abdd843cca2b5574181
+      size: 30990
     - path: artifacts/processed_data/train.csv
-      md5: 0196b80fbeb701453fe0052e35635db2
-      size: 74914
+      md5: bcec8e1479ac02fa629498d7b70cb463
+      size: 62756
   train:
     cmd: python -m src.stage_03_train --config=params.yaml
     deps:
     - path: artifacts/processed_data/train.csv
-      md5: 0196b80fbeb701453fe0052e35635db2
-      size: 74914
+      md5: bcec8e1479ac02fa629498d7b70cb463
+      size: 62756
     - path: src/stage_03_train.py
-      md5: 8c431b5a8ed0e4ff10fd78eab9329ebd
-      size: 2018
+      md5: 27c8cd094bfed35628820c67a1161fb5
+      size: 2779
     - path: src/utils/common_utils.py
-      md5: 6c15ad9661c6299a304d7fe83d752623
-      size: 904
+      md5: 293810a50407c38c6c201dffb5638338
+      size: 1194
     params:
       params.yaml:
         artifacts.split_data.train_path: artifacts/processed_data/train.csv
         base.random_state: 42
         base.target_col: quality
-        estimators.ElasticNet.params.alpha: 0.7
-        estimators.ElasticNet.params.l1_ratio: 0.4
+        estimators.ElasticNet.params.alpha: 0.6
+        estimators.ElasticNet.params.l1_ratio: 0.8
     outs:
     - path: artifacts/report/params.json
-      md5: 1a1eea97e93a98c1c77e2c184dea8763
+      md5: 68fdeb918d7f86c3e3ddb601218ab541
       size: 44
     - path: artifacts/saved_models/model.joblib
-      md5: 2c811745c0132b07dd1c81bc3a948ec3
+      md5: 57a72fb358c6a07253f7482be7f7acb7
       size: 1316

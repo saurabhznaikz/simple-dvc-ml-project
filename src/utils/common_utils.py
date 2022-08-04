@@ -3,6 +3,8 @@ import shutil
 import logging
 import json
 import yaml
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import numpy as np
 
 
 def read_params(config_path: str)-> dict:
@@ -31,3 +33,10 @@ def save_reports(filepath: str, report: dict):
         json.dump(report, f, indent=4)
     logging.info(f"details of the report: {report}")
     logging.info(f"reports saved at {filepath}")
+
+def evaluate(actual, pred):
+    rmse = np.sqrt(mean_squared_error(actual, pred))
+    mae = mean_absolute_error(actual, pred)
+    r2 = r2_score(actual, pred)
+    return rmse, mae, r2
+

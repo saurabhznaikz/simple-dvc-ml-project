@@ -4,10 +4,14 @@ from src.utils.common_utils import (
     read_params,
     create_dir,
     save_reports,
+    evaluate
 )
 from sklearn.linear_model import ElasticNet
 import joblib
 import logging
+import mlflow
+import mlflow.sklearn
+from sklearn.model_selection import train_test_split
 
 logging_str = "[%(asctime)s: %(levelname)s: %(module)s]: %(message)s"
 logging.basicConfig(level=logging.DEBUG, format=logging_str)
@@ -38,9 +42,23 @@ def train(config_path):
     train = pd.read_csv(train_data_path, sep=",")
     train_y = train[target]
     train_x = train.drop(target, axis=1)
+    X_train, X_test, y_train, y_test = train_test_split(train_x, train_y, test_size=split_ratio, random_state=random_seed)
 
-    lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=random_seed)
-    lr.fit(train_x, train_y)
+    with mlflow.start_run():
+        lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=random_seed)
+        lr.fit(X_train, y_train)
+        pred = lr.predict(X_test)
+
+        rmse, mae, r2 = evaluate(y_test, pred)
+
+
+        mlflow.log_param("alpha", alpha)
+        mlflow.log_param("l1_ratio", l1_ratio)
+
+        mlflow.log_metric("rmse", rmse)
+        mlflow.log_metric("mae", mae)
+        mlflow.log_metric("r2", r2)
+        mlflow.sklearn.log_model(lr, "model")
 
     model_dir = artifacts["model_dir"]
     model_path = artifacts["model_path"]
