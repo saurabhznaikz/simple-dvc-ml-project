@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Dell/PycharmProjects/Simple-dvc-project/simple-dvc-project/src/mlruns/0/bfc56e9fa0414573a2268ac1f4c1008c/artifacts
+end_time: 1660036592466
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: bfc56e9fa0414573a2268ac1f4c1008c
+run_uuid: bfc56e9fa0414573a2268ac1f4c1008c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1660036586467
+status: 3
+tags: []
+user_id: Dell
