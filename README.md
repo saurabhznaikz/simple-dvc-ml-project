@@ -1,4 +1,4 @@
-# simple-dvc-project
+# simple-dvc-ml-project
 This project explains about how to automate ML pipelines using dvc(data version control) and mlflow library
 
 ## Workflow
